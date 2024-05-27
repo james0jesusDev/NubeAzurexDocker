@@ -1,0 +1,27 @@
+﻿@page
+@model MiProyecto.Pages.IndexModel
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1>Bienvenido</h1>
+
+<p>Haz clic en el botón para recibir un saludo:</p>
+<button id="btnSaludar">Saludar</button>
+
+<div id="saludo"></div>
+
+@section Scripts {
+    <script>
+        // Manejar el clic en el botón
+        document.getElementById("btnSaludar").addEventListener("click", function () {
+            // Realizar una solicitud GET al método OnGetSaludar del archivo code-behind
+            fetch("/Index?handler=Saludar")
+                .then(response => response.text())
+                .then(data => {
+                    // Mostrar el saludo en el div correspondiente
+                    document.getElementById("saludo").innerText = data;
+                });
+        });
+    </script>
+}
